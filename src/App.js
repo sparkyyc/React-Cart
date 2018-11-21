@@ -3,6 +3,8 @@ import './App.css';
 import CartHeader from './components/cartHeader'
 import CartFooter from './components/CartFooter'
 import CartItems from './components/CartItems'
+import AddItem from './components/AddItem'
+import CalcTotal from './components/total'
 
 class App extends Component {
 
@@ -28,6 +30,13 @@ class App extends Component {
     }
   }
 
+  onAddItem = (product) => {
+     this.setState((prevState) => ({
+       ...prevState,
+      cartItemsList: prevState.cartItemsList.concat(product)
+     }))
+  }
+
   render() {
     return (
       <div className="shoppingCartMain">
@@ -36,6 +45,8 @@ class App extends Component {
         </div>
         <div className="cartItems">
           <CartItems items={this.state.cartItemsList} />
+          <CalcTotal items={this.state.cartItemsList}/>
+          <AddItem options={this.state.products} AddItem={this.onAddItem}/>
         </div>
         <div className="footer">
           <CartFooter />
